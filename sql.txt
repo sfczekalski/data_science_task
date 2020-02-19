@@ -1,0 +1,8 @@
+select students.student_id, students.name, students.surname, students.birth_date, students.faculty
+from students 
+inner join
+	(select exam_results.student_id
+	from exam_results 
+	inner join class_catalogue on exam_results.class_id = class_catalogue.class_id
+	where class_catalogue.class_name = 'algebra' and exam_results.grade >= 4.0) as good_algebra_students
+on students.student_id = good_algebra_students.student_id
